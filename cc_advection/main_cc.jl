@@ -1,4 +1,9 @@
-# Sample 2D advection solver on curvilinear coordinates
+"""
+Sample 2D advection solver on curvilinear coordinates
+
+See: https://docs.julialang.org/en/v1/manual/documentation/
+- I need to properly document all the routines I call in this code
+"""
 
 using ConfParser
 using Printf

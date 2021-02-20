@@ -1,5 +1,11 @@
-function output_soln(t,qt,nf,outputdir)
-#OUTPUT_SOLN.  Output the solution to file
+"""
+    output_soln(t,tq,nf,outputdir)
+
+Output the solution to file.  Data files are stored in the folder outputdir.  This routine
+creates the folder if it doesn't already exist in the working path.  It also compies over
+the .ini file to the output directory.
+"""
+function output_soln(t,q,nf,outputdir)
 
     if( ~isdir(outputdir) )
         mkdir( outputdir )
@@ -19,9 +25,9 @@ function output_soln(t,qt,nf,outputdir)
         # Save the time
         write(io, string(t,"\n") )
 
-        # Save each element of qt
-        for i=1:length(qt)
-            write(io, string(qt[i],"\n") )
+        # Save each element of q
+        for i=1:length(q)
+            write(io, string(q[i],"\n") )
         end
 
     end
@@ -30,8 +36,14 @@ function output_soln(t,qt,nf,outputdir)
     
 end
 
+"""
+     cc_advec_solve(t,qt,Tend,dxvec,uvec)
+
+Single time step on the constant coefficient advection equation:
+
+    q_t + (u1 q)_x + (u2 q)_y = 0
+"""
 function cc_advec_solve(t,qt,Tend,dxvec,uvec)
-#CC_ADVEC_SOLVE - single time step on the constant coefficient advection equation:
 
     # Grid parameters
     dx = dxvec[1]
@@ -51,7 +63,6 @@ function cc_advec_solve(t,qt,Tend,dxvec,uvec)
     # Storage for the fluxes
     Fp = zeros(mx+1,my)
     Gp = zeros(mx,my+1)
-
     
     # TOOD - REPLACE WITH ACTUAL PARAMETERS HERE
     alphax = abs(u1)
